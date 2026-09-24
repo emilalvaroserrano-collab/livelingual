@@ -25,6 +25,7 @@ const jitsiLogo = readFileSync(join(VENDOR, "images/jitsilogo.png"));
 const deepLinkLogo = readFileSync(join(VENDOR, "images/logo-deep-linking.png"));
 const deepLinkMobileLogo = readFileSync(join(VENDOR, "images/logo-deep-linking-mobile.png"));
 const appleTouchIcon = readFileSync(join(VENDOR, "images/apple-touch-icon.png"));
+const orbitTranslator = readFileSync(join(VENDOR, "orbit-translator.js"));
 
 function indexHtml() {
   return readFileSync(indexPath);
@@ -39,6 +40,7 @@ const LOCAL = {
   "/images/apple-touch-icon.png": { type: "image/png", body: appleTouchIcon },
   "/lang/main-en.json": { type: "application/json; charset=utf-8", body: langEn },
   "/lang/main.json": { type: "application/json; charset=utf-8", body: langEn },
+  "/orbit-translator.js": { type: "application/javascript; charset=utf-8", body: orbitTranslator },
 };
 
 const cache = new Map();

@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as MeetRoomRouteImport } from './routes/meet.$room'
+import { Route as ApiOrbitTranslationTokenRouteImport } from './routes/api.orbit-translation-token'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -23,30 +24,40 @@ const MeetRoomRoute = MeetRoomRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 
+const ApiOrbitTranslationTokenRoute = ApiOrbitTranslationTokenRouteImport.update({
+  id: '/api/orbit-translation-token',
+  path: '/api/orbit-translation-token',
+  getParentRoute: () => rootRouteImport,
+} as any)
+
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/meet/$room': typeof MeetRoomRoute
+  '/api/orbit-translation-token': typeof ApiOrbitTranslationTokenRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/meet/$room': typeof MeetRoomRoute
+  '/api/orbit-translation-token': typeof ApiOrbitTranslationTokenRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/meet/$room': typeof MeetRoomRoute
+  '/api/orbit-translation-token': typeof ApiOrbitTranslationTokenRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/meet/$room'
+  fullPaths: '/' | '/meet/$room' | '/api/orbit-translation-token'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/meet/$room'
-  id: '__root__' | '/' | '/meet/$room'
+  to: '/' | '/meet/$room' | '/api/orbit-translation-token'
+  id: '__root__' | '/' | '/meet/$room' | '/api/orbit-translation-token'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   MeetRoomRoute: typeof MeetRoomRoute
+  ApiOrbitTranslationTokenRoute: typeof ApiOrbitTranslationTokenRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +76,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MeetRoomRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/orbit-translation-token': {
+      id: '/api/orbit-translation-token'
+      path: '/api/orbit-translation-token'
+      fullPath: '/api/orbit-translation-token'
+      preLoaderRoute: typeof ApiOrbitTranslationTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   MeetRoomRoute: MeetRoomRoute,
+  ApiOrbitTranslationTokenRoute: ApiOrbitTranslationTokenRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
