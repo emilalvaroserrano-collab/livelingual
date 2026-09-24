@@ -520,7 +520,12 @@
     state.ducked.clear();
   }
 
+  function init() {
+    makePanel();
+    watchToolbar();
+  }
+
   window.addEventListener("beforeunload", function () { stopTranslation(false); });
-  makePanel();
-  watchToolbar();
+  if (document.body) init();
+  else document.addEventListener("DOMContentLoaded", init, { once: true });
 })();
