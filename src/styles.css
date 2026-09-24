@@ -41,6 +41,8 @@
 
   body {
     margin: 0;
+    overscroll-behavior: none;
+    -webkit-tap-highlight-color: transparent;
     min-height: 100%;
     font-family: var(--font-sans);
     background: var(--color-bg);
@@ -137,5 +139,21 @@
   .eq span {
     animation: none;
     transform: scaleY(0.7);
+  }
+}
+
+
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+@media (display-mode: standalone) {
+  html,
+  body {
+    min-height: 100dvh;
   }
 }
