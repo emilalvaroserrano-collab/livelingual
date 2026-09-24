@@ -1,0 +1,38 @@
+{
+  "url": "http://127.0.0.1:8081/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Orbit Meeting",
+      "hasCanvas": false,
+      "bodyTextLen": 175,
+      "bodyTextHash": "9638e5f46f8eda82b9363ae785ddb167e9f69477c70ec72de46f3bab1cd6c590",
+      "bodyTextPrefix": "Orbit Meeting Secure and high quality meetings Start meeting Mee",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Orbit Meeting",
+      "hasCanvas": false,
+      "bodyTextLen": 175,
+      "bodyTextHash": "9638e5f46f8eda82b9363ae785ddb167e9f69477c70ec72de46f3bab1cd6c590",
+      "bodyTextPrefix": "Orbit Meeting Secure and high quality meetings Start meeting Mee",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-built.json",
+  "divergesFromBaseline": false,
+  "baselineReasons": []
+}
