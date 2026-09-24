@@ -22,3 +22,15 @@ test("serves the Orbit translator client without embedding a permanent API key",
   assert.doesNotMatch(source, /GEMINI_API_KEY/);
   assert.doesNotMatch(source, /x-goog-api-key/);
 });
+
+
+test("mobile Jitsi shell keeps native web-app metadata and a parse-safe Translator icon", async () => {
+  const result = await handleJitsiRequest("/mobile-test-room", "GET", "text/html");
+  assert.equal(result?.status, 200);
+  const html = result?.body?.toString("utf8") ?? "";
+  assert.match(html, /viewport-fit=cover/);
+  assert.match(html, /apple-mobile-web-app-capable/);
+  assert.match(html, /id: 'orbit-translator'/);
+  assert.match(html, /icon: "data:image\/svg\+xml/);
+  assert.doesNotMatch(html, /icon: 'data:image\/svg\+xml,[^\n]*xmlns='/);
+});
