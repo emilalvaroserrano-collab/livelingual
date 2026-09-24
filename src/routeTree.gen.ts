@@ -38,11 +38,13 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/meet/$room': typeof MeetRoomRoute
+  '/api/orbit-translation-token': typeof ApiOrbitTranslationTokenRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/meet/$room': typeof MeetRoomRoute
+  '/api/orbit-translation-token': typeof ApiOrbitTranslationTokenRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
