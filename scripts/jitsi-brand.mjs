@@ -52,7 +52,9 @@ export function passesThrough(pathname) {
     pathname.startsWith("/src/") ||
     pathname.startsWith("/node_modules") ||
     pathname.startsWith("/auth") ||
-    pathname.startsWith("/api")
+    pathname.startsWith("/api") ||
+    pathname === "/meet" ||
+    pathname.startsWith("/meet/")
   );
 }
 

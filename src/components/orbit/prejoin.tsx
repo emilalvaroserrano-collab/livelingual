@@ -18,7 +18,6 @@ export function Prejoin({ room, media }: { room: string; media: LocalMedia }) {
   const toggleAudio = useMeeting((state) => state.toggleAudio);
   const toggleVideo = useMeeting((state) => state.toggleVideo);
   const mirror = useMeeting((state) => state.mirror);
-  const join = useMeeting((state) => state.join);
   const videoLive = Boolean(media.stream?.getVideoTracks().some((track) => track.readyState === "live"));
 
   return (
@@ -49,9 +48,19 @@ export function Prejoin({ room, media }: { room: string; media: LocalMedia }) {
           className="rounded-card border border-line bg-elevated p-4"
           onSubmit={(event) => {
             event.preventDefault();
-            if (!displayName.trim()) setDisplayName("Guest");
+            const name = displayName.trim() || "Guest";
+            if (name !== displayName) setDisplayName(name);
             rememberRoom(room);
-            join(room);
+
+            // Hand off from Orbit's device preview to the real Jitsi room.
+            // Jitsi treats /tenant/room as a tenant path, so the conference
+            // itself must use a single room segment: /<room>.
+            const params = new URLSearchParams();
+            params.set("userInfo.displayName", JSON.stringify(name));
+            params.set("config.prejoinConfig.enabled", "false");
+            params.set("config.startWithAudioMuted", String(!wantAudio));
+            params.set("config.startWithVideoMuted", String(!wantVideo));
+            window.location.assign(`/${encodeURIComponent(room)}#${params.toString()}`);
           }}
         >
           <h1 className="text-2xl font-medium tracking-tight">Join meeting</h1>
