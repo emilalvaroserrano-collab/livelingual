@@ -9,9 +9,13 @@ export const Route = createRootRoute({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
+      { name: "mobile-web-app-capable", content: "yes" },
+      { name: "apple-mobile-web-app-capable", content: "yes" },
+      { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
+      { name: "format-detection", content: "telephone=no" },
       { title: APP_NAME },
-      { name: "theme-color", content: "#0a0a0b" },
+      { name: "theme-color", content: "#111418" },
       {
         name: "description",
         content: "Secure, high-quality meetings. Start a room in the browser — no account.",
