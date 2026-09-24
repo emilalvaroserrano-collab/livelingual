@@ -1,0 +1,51 @@
+name: Verify Vercel build
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Tests
+        run: npm test
+
+      - name: Build Vercel output
+        run: npm run build
+        env:
+          VITE_AUTH_ENABLED: "false"
+
+      - name: Verify Build Output API
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f .vercel/output/config.json
+          test "$(node -p "require('./.vercel/output/config.json').version")" = "3"
+          server_func="$(find .vercel/output/functions -maxdepth 1 -type d -name '*.func' | head -n 1)"
+          test -n "$server_func"
+          test -f "$server_func/vendor/jitsi/index.html"
+          test -f "$server_func/vendor/jitsi/orbit-translator.js"
+          grep -q "gemini-3.5-live-translate-preview" "$server_func/vendor/jitsi/orbit-translator.js"
+          ! grep -Eq 'AQ\.[A-Za-z0-9_-]{20,}' "$server_func/vendor/jitsi/orbit-translator.js"
